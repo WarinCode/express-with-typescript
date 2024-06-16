@@ -1,6 +1,6 @@
 import { file, password } from "bun";
 import type { Request, Response, NextFunction } from "express";
-import LowDatabaseController from "./LowDatabaseController";
+import DatabaseController from "./DatabaseController";
 import Helper from "../utils/Helper";
 import type {
   Sender,
@@ -14,7 +14,7 @@ import type {
   OnSignin,
 } from "../types";
 
-const db: LowDatabaseController = new LowDatabaseController(
+const db: DatabaseController = new DatabaseController(
   "dbfile.json"
 ).getInstance();
 

@@ -2,7 +2,7 @@ import { JSONFile } from "lowdb/node";
 import type { CRUDOperations, UserModel, User, Users } from "../types";
 import { password } from "bun";
 
-export default class LowDatabaseController
+export default class DatabaseController
   extends JSONFile<UserModel>
   implements CRUDOperations<UserModel, User>
 {
