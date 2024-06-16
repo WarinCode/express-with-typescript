@@ -5,9 +5,9 @@ enum ApiEndpoint {
     Signup = "/signup",
     Read = "/api/user/id=:id",
     ReadAll = "/api/users",
-    Create = "/api/user/create",
-    Update = "/api/user/update/id=:id",
-    Delete = "/api/user/delete/id=:id",
+    Create = "/api/create/user",
+    Update = "/api/update/user/id=:id",
+    Delete = "/api/delete/user/id=:id",
     NotFound = "*"
 }
 

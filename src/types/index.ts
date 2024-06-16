@@ -12,3 +12,4 @@ export type HandlerFunction<T = ParamsDictionary, D = any, A = any> = (
   res: Response<D>,
   next: NextFunction
 ) => void | Promise<void>;
+export type OnSignin = Pick<User, "email" | "password">;

@@ -8,6 +8,7 @@ const controller: UserController = new UserController();
 router.get(ApiEndpoint.Root, controller.sendHtmlFile);
 router.get(ApiEndpoint.About, controller.sendHtmlFile);
 router.get(ApiEndpoint.Signin, controller.sendHtmlFile);
+router.post(ApiEndpoint.Signin, controller.signin);
 router.get(ApiEndpoint.Signup, controller.sendHtmlFile);
 router.get(ApiEndpoint.Read, controller.sendData);
 router.get(ApiEndpoint.ReadAll, controller.sendAllData);

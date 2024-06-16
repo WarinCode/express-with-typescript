@@ -1,11 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <h1>Sign Up page</h1>
-</body>
+  </head>
+  <body>
+    <form method="post" action="http://localhost:3000/api/create/user" style="width: 400px; margin: auto">
+      <h1>Sign Up.</h1>
+      <div>
+        <label for="firstname">firstname: </label>
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          required
+          placeholder="enter your firstname"
+        />
+      </div>
+      <br />
+      <div>
+        <label for="lastname">lastname: </label>
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          required
+          placeholder="enter your lastname"
+        />
+      </div>
+      <br />
+      <div>
+        <label>sex: </label>
+        <label for="male">male</label>
+        <input
+          type="radio"
+          value="male"
+          name="sex"
+          id="male"
+          required
+          checked
+        />
+        <label for="female">female</label>
+        <input type="radio" value="female" name="sex" id="female" required />
+      </div>
+      <br />
+      <div>
+        <label for="email">Email: </label>
+        <input
+          type="email"
+          name="email"
+          required
+          id="email"
+          placeholder="enter your email"
+        />
+      </div>
+      <br />
+      <div>
+        <label for="age">Age: </label>
+        <input
+          type="number"
+          name="age"
+          required
+          id="age"
+          placeholder="enter your age"
+        />
+      </div>
+      <br />
+      <div>
+        <label for="birthday">birthday: </label>
+        <input
+          type="date"
+          name="birthday"
+          required
+          id="birthday"
+          placeholder="select your birthday"
+        />
+      </div>
+      <br />
+      <div>
+        <label for="password">password: </label>
+        <input
+          type="password"
+          name="password"
+          required
+          id="password"
+          placeholder="enter your password"
+          minlength="8"
+          maxlength="30"
+        />
+      </div>
+      <br />
+      <button type="submit" style="width: 160px; margin: auto;">create your account.</button>
+    </form>
+  </body>
 </html>

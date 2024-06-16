@@ -1,5 +1,6 @@
 import { JSONFile } from "lowdb/node";
 import type { CRUDOperations, UserModel, User, Users } from "../types";
+import { password } from "bun";
 
 export default class LowDatabaseController
   extends JSONFile<UserModel>
@@ -53,13 +54,31 @@ export default class LowDatabaseController
   public async update(id: string, data: User): Promise<void> {
     this.model = await super.read();
     if (this.model !== null) {
-      this.data = this.model.users.map((user: User): User => {
-        if (user.id === id) {
-          return data;
+      this.data = this.model.users;
+      let newData: Users = [];
+      let userObject: User;
+
+      const newHashPassword: string = await password.hash(data.password);
+      for (const i in this.data) {
+        userObject = this.data[i];
+        if (userObject.id === id) {
+          userObject = data;
+          if (userObject.password !== "" || userObject.password.length !== 0) {
+            let isSamePassword = await password.verify(
+              userObject.password,
+              this.data[i].password
+            );
+            console.log(isSamePassword);
+            userObject.password = isSamePassword
+              ? this.data[i].password
+              : newHashPassword;
+              console.log(userObject.password);
+              
+          }
         }
-        return user;
-      });
-      this.model.users = this.data;
+        newData.push(userObject);
+      }
+      this.model.users = newData;
       await super.write(this.model);
       return;
     }
@@ -81,12 +100,12 @@ export default class LowDatabaseController
     return this;
   }
 
-  public async ckeckUser(id: string): Promise<boolean> {
+  public async findUserWithId(id: string): Promise<boolean> {
     this.model = await super.read();
     if (this.model !== null) {
       this.data = this.model.users;
       return this.data.map(({ id }: User): string => id).includes(id);
-    } 
-    return false
+    }
+    return false;
   }
 }
