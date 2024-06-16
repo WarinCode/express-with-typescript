@@ -6,7 +6,7 @@ export default class Helper {
   public static userData: User;
 
   public static async getRandomUser(): Promise<User> {
-    const { person, internet, date, string }: Faker = faker;
+    const { person, internet, date }: Faker = faker;
     const sex: string = person.sex();
     const firstname: string = person.firstName();
     const lastname: string = person.lastName();
@@ -48,7 +48,6 @@ export default class Helper {
       age: parseInt(String(this.userData.age)),
       password: await password.hash(this.userData.password),
     };
-    console.log(this.userData);
     return this.userData;
   }
 

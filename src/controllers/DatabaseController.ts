@@ -68,12 +68,9 @@ export default class DatabaseController
               userObject.password,
               this.data[i].password
             );
-            console.log(isSamePassword);
             userObject.password = isSamePassword
               ? this.data[i].password
-              : newHashPassword;
-              console.log(userObject.password);
-              
+              : newHashPassword;   
           }
         }
         newData.push(userObject);

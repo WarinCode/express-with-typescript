@@ -96,7 +96,8 @@ export default class UserController
   ): Promise<void> {
     if (await db.findUserWithId(id)) {
       await db.update(id, body);
-      res.send("Updated successfully.");
+      res.send(await db.readAll());
+      // res.send("Updated successfully.");
       return;
     }
 
