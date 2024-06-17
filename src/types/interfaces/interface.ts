@@ -17,7 +17,7 @@ export interface UserModel {
 export interface CRUDOperations<T extends UserModel, D extends User> {
     read(): Promise<T | null>;
     create(data: D): Promise<void>;
-    update(id: string, data: D): Promise<void>;
+    update(id: string, data: Partial<D>): Promise<void>;
     delete(id: string): Promise<void>;
 }
 export interface Sender<T = RequestHandler> {

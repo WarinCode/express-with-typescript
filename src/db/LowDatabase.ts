@@ -2,7 +2,7 @@ import { JSONFile } from "lowdb/node";
 import type { CRUDOperations, UserModel, User, Users } from "../types";
 import { password } from "bun";
 
-export default class DatabaseController
+export default class LowDatabase
   extends JSONFile<UserModel>
   implements CRUDOperations<UserModel, User>
 {
@@ -51,31 +51,47 @@ export default class DatabaseController
     }
   }
 
-  public async update(id: string, data: User): Promise<void> {
+  public async update(id: string, data: Partial<User>): Promise<void> {
     this.model = await super.read();
     if (this.model !== null) {
       this.data = this.model.users;
-      let newData: Users = [];
-      let userObject: User;
-
-      const newHashPassword: string = await password.hash(data.password);
-      for (const i in this.data) {
-        userObject = this.data[i];
-        if (userObject.id === id) {
-          userObject = data;
-          if (userObject.password !== "" || userObject.password.length !== 0) {
-            let isSamePassword = await password.verify(
-              userObject.password,
-              this.data[i].password
-            );
-            userObject.password = isSamePassword
-              ? this.data[i].password
-              : newHashPassword;   
+      const users: Users = [];
+      for (const user of this.data) {
+        if (id === user.id) {
+          const keys: string[] = Object.keys(data);
+          for (const key of keys) {
+            if (key === "firstname" && typeof data[key] === "string") {
+              user[key] = data[key];
+            }
+            if (key === "lastname" && typeof data[key] === "string") {
+              user[key] = data[key];
+            }
+            if (key === "age" && typeof data[key] === "number") {
+              user[key] = data[key];
+            }
+            if (key === "sex" && typeof data[key] === "string") {
+              user[key] = data[key];
+            }
+            if (key === "birthday" && typeof data[key] === "string") {
+              user[key] = data[key];
+            }
+            if (key === "id" && typeof data[key] === "string") {
+              user[key] = data[key];
+            }
+            if (key === "email" && typeof data[key] === "string") {
+              user[key] = data[key];
+            }
+            if (key === "password" && typeof data[key] === "string") {
+              user[key] = (await password.verify(data[key], user[key]))
+                ? user[key]
+                : await password.hash(data[key]);
+            }
           }
         }
-        newData.push(userObject);
+        users.push(user);
       }
-      this.model.users = newData;
+      this.data = users;
+      this.model.users = this.data;
       await super.write(this.model);
       return;
     }

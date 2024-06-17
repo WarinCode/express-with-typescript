@@ -231,22 +231,12 @@
       "birthday": "Thu, 25 Oct 1945 13:52:03 GMT"
     },
     {
-      "firstname": "Alize",
-      "lastname": "Prohaska",
-      "sex": "female",
-      "id": "4b866c99",
-      "email": "Alize.Prohaska@yahoo.com",
-      "password": "$argon2id$v=19$m=65536,t=2,p=1$5jobDU+GEi09VZeJmkOuK4sRun9lhNKllcgsbloDOt8$YZto6lJ+skdy1l94d5Fl2ADfgd4np19mS88OX+IrcNU",
-      "age": 29,
-      "birthday": "Sat, 08 Apr 1995 22:33:14 GMT"
-    },
-    {
       "firstname": "Robyn",
       "lastname": "Crooks",
       "sex": "male",
       "email": "Robyn_Crooks34@hotmail.com",
-      "password": "$argon2id$v=19$m=65536,t=2,p=1$7WBLGCo6tqF4j0QGg1bmO4HhBuubNDTtu2/slkLjLmw$jfV/TxslWRmfRPjAzszaLIO/rf5Y3WlzzlYJKhK5p5E",
-      "age": 21,
+      "password": "$argon2id$v=19$m=65536,t=2,p=1$OlXVPVkotsm8yCN2OIWQfixaJJycAjnhK/IVOqptjpE$RBC0O8uV3+7CVV6yiPjB8YN/K85jPNvK0I/MJIdx04w",
+      "age": 20,
       "birthday": "Fri, 09 Apr 2004 22:49:29 GMT",
       "id": "0d7a72a2"
     }

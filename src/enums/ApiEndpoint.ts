@@ -3,6 +3,7 @@ enum ApiEndpoint {
     About = "/about",
     Signin = "/signin",
     Signup = "/signup",
+    Posts = "/posts",
     Read = "/api/user/id=:id",
     ReadAll = "/api/users",
     Create = "/api/create/user",

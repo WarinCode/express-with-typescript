@@ -1,6 +1,6 @@
 import { file, password } from "bun";
 import type { Request, Response, NextFunction } from "express";
-import DatabaseController from "./DatabaseController";
+import LowDatabase from "../db/LowDatabase";
 import Helper from "../utils/Helper";
 import type {
   Sender,
@@ -14,7 +14,7 @@ import type {
   OnSignin,
 } from "../types";
 
-const db: DatabaseController = new DatabaseController(
+const lowdb: LowDatabase = new LowDatabase(
   "dbfile.json"
 ).getInstance();
 
@@ -44,7 +44,7 @@ export default class UserController
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const result: User | null = await db.readWithId(id);
+    const result: User | null = await lowdb.readWithId(id);
     try {
       if (result !== null) {
         res.send(result);
@@ -61,7 +61,7 @@ export default class UserController
     res: Response,
     next: NextFunction
   ) {
-    const result: Users | null = await db.readAll();
+    const result: Users | null = await lowdb.readAll();
     try {
       if (result !== null) {
         res.send(result);
@@ -81,7 +81,7 @@ export default class UserController
     try {
       Helper.setUser(body);
       body = await Helper.getBody();
-      await db.create(body);
+      await lowdb.create(body);
       res.send("Created successfully.");
       return;
     } catch (e: unknown) {
@@ -94,10 +94,10 @@ export default class UserController
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    if (await db.findUserWithId(id)) {
-      await db.update(id, body);
-      res.send(await db.readAll());
-      // res.send("Updated successfully.");
+    if (await lowdb.findUserWithId(id)) {
+      await lowdb.update(id, body);
+      // res.send(await lowdb.readAll());
+      res.send("Updated successfully.");
       return;
     }
 
@@ -109,8 +109,8 @@ export default class UserController
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    if (await db.findUserWithId(id)) {
-      await db.delete(id);
+    if (await lowdb.findUserWithId(id)) {
+      await lowdb.delete(id);
       res.send("Deleted successfully.");
       return;
     }
@@ -123,7 +123,7 @@ export default class UserController
     res: Response,
     next: NextFunction
   ) {
-    const data: Users | null = await db.readAll();
+    const data: Users | null = await lowdb.readAll();
     if (data === null) {
       res.send("<h1>Login Failed!</h1><br/><a href='/signin'><button>back</button></a>");
       return;
